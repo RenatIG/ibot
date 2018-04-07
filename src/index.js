@@ -31,7 +31,7 @@ const bot = new TelegramBot(config.TOKEN, {
 
 bot.on('message', msg => {
 
-   // console.log('Working', msg.from.first_name)
+   
     const chatId = helper.getChatId(msg)
 
     switch (msg.text) {
@@ -56,7 +56,7 @@ bot.on('message', msg => {
             BONUS(msg)
             break;
         case kb.home.news:
-            bot.sendMessage(msg.from.id, `<a href="https://t.me/joinchat/AAAAAE6fDSfSe0AZ8T_rYA">Подписывайтесь на наш новостной канал, чтобы быть в курсе событий в мире интернет инвестиций!</a>`, {parse_mode: 'HTML'})
+            bot.sendMessage(msg.from.id, `<a href="https://t.me/joinchat/AAAAAE6fDSfSe0AZ8T_rYA">Подписывайтесь на наш новостной канал..</a>`, {parse_mode: 'HTML'})
 
     }
 });
@@ -174,7 +174,7 @@ bot.on('callback_query', query => {
 //USD ADD=================================================
 
 function usdadd(userId) {
-    bot.sendMessage(userId, `😎 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/usdadd</code> название`,
+    bot.sendMessage(userId, `🤔 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/usdadd</code> название`,
         {reply_markup: {keyboard: keyboard.usd, resize_keyboard: true},parse_mode: 'HTML'})}
 
     bot.onText(/\/usdadd (.+)/, (msg, match) => {
@@ -188,7 +188,7 @@ function usdadd(userId) {
                 projectu: project})
                 .then((invest) => {
                     if (invest) {
-                        bot.sendMessage(chatId, `🤔 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
+                        bot.sendMessage(chatId, `🙄 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
                         , {reply_markup: {keyboard: keyboard.home, resize_keyboard: true}, parse_mode: 'HTML'})
                     }
                         else {
@@ -199,7 +199,7 @@ function usdadd(userId) {
                         usdPromise.save()
                             .then (invest => {
 
-                            bot.sendMessage(chatId, `😎👍 <b>Вы добавили в портфель:</b> <i>"${invest.projectu}"</i>`
+                            bot.sendMessage(chatId, `👌😎 <b>Вы добавили в портфель:</b> <i>"${invest.projectu}"</i>`
                                 ,{reply_markup: {keyboard: keyboard.home, resize_keyboard: true}, parse_mode: 'HTML'})
 
                         })     }
@@ -272,7 +272,7 @@ bot.onText(/\/usddep (.+) - (.+)/, (msg, match) => {
                         const allprofit = +`${user.allprofitu}` - +`${deposit}`
                         let a = false
                         if(invest){a = Math.sign(profit) !== -1}
-                        const b = a ? '🎖' : '♻️'
+                        const b = a ? '⭐' : '♻️'
                         Promise.all([
                             Usd.findOneAndUpdate({tgId: tgId, projectu: project},
                                     {$set: {depu: dep.toFixed(2), profitu: profit.toFixed(2), statu: b}}
@@ -315,7 +315,7 @@ bot.onText(/\/usdcash (.+) - (.+)/, (msg, match) => {
                     const allprofit = +`${user.allprofitu}` + +`${summa}`
                     let a = false
                     if(invest){a = Math.sign(profit) !== -1}
-                    const b = a ? '🎖' : '♻️'
+                    const b = a ? '⭐' : '♻️'
 
                     Promise.all([
                         Usd.findOneAndUpdate({tgId: tgId, projectu: project},
@@ -380,7 +380,7 @@ bot.on('callback_query', query => {
 //RUB ADD=================================================
 
 function rubadd(userId) {
-    bot.sendMessage(userId, `😎 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/rubadd</code> название`,
+    bot.sendMessage(userId, `🤔 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/rubadd</code> название`,
         {reply_markup: {keyboard: keyboard.usd, resize_keyboard: true},parse_mode: 'HTML'})}
 
 bot.onText(/\/rubadd (.+)/, (msg, match) => {
@@ -393,7 +393,7 @@ bot.onText(/\/rubadd (.+)/, (msg, match) => {
         Rub.findOne({tgId: tgId, project: project})
             .then((invest) => {
                 if (invest) {
-                    bot.sendMessage(chatId, `🤔 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
+                    bot.sendMessage(chatId, `🙄 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
                         , {reply_markup: {keyboard: keyboard.home, resize_keyboard: true}, parse_mode: 'HTML'})
                 }
                 else {
@@ -480,7 +480,7 @@ bot.onText(/\/rubdep (.+) - (.+)/, (msg, match) => {
                     const allprofit = +`${user.allprofitr}` - +`${deposit}`
                     let a = false
                     if(invest){a = Math.sign(profit) !== -1}
-                    const b = a ? '🎖' : '♻️'
+                    const b = a ? '⭐' : '♻️'
                     Promise.all([
                         Rub.findOneAndUpdate({tgId: tgId, project: project},
                             {$set: {dep: dep.toFixed(2), profit: profit.toFixed(2), stat: b}}
@@ -523,7 +523,7 @@ bot.onText(/\/rubcash (.+) - (.+)/, (msg, match) => {
                     const allprofit = +`${user.allprofitr}` + +`${summa}`
                     let a = false
                     if(invest){a = Math.sign(profit) !== -1}
-                    const b = a ? '🎖' : '♻️'
+                    const b = a ? '⭐' : '♻️'
 
                     Promise.all([
                         Rub.findOneAndUpdate({tgId: tgId, project: project},
@@ -589,7 +589,7 @@ bot.on('callback_query', query => {
 //BTC ADD=================================================
 
 function btcadd(userId) {
-    bot.sendMessage(userId, `😎 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/btcadd</code> название`,
+    bot.sendMessage(userId, `🤔 <b>Куда инвестируем?</b>\n<i>Отправьте сообщение вида:</i>\n\n<code>/btcadd</code> название`,
         {reply_markup: {keyboard: keyboard.usd, resize_keyboard: true},parse_mode: 'HTML'})}
 
 bot.onText(/\/btcadd (.+)/, (msg, match) => {
@@ -602,7 +602,7 @@ bot.onText(/\/btcadd (.+)/, (msg, match) => {
         Btc.findOne({tgId: tgId, project: project})
             .then((invest) => {
                 if (invest) {
-                    bot.sendMessage(chatId, `🤔 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
+                    bot.sendMessage(chatId, `🙄 <b>В Вашем портфеле уже есть</b> <i>"${project}"</i>.\n<code>повторите действие заново..</code>`
                         , {reply_markup: {keyboard: keyboard.home, resize_keyboard: true}, parse_mode: 'HTML'})
                 }
                 else {
@@ -689,7 +689,7 @@ bot.onText(/\/btcdep (.+) - (.+)/, (msg, match) => {
                     const allprofit = +`${user.allprofitb}` - +`${deposit}`
                     let a = false
                     if(invest){a = Math.sign(profit) !== -1}
-                    const b = a ? '🎖' : '♻️'
+                    const b = a ? '⭐' : '♻️'
                     Promise.all([
                         Btc.findOneAndUpdate({tgId: tgId, project: project},
                             {$set: {dep: dep.toFixed(2), profit: profit.toFixed(2), stat: b}}
@@ -732,7 +732,7 @@ bot.onText(/\/btccash (.+) - (.+)/, (msg, match) => {
                     const allprofit = +`${user.allprofitb}` + +`${summa}`
                     let a = false
                     if(invest){a = Math.sign(profit) !== -1}
-                    const b = a ? '🎖' : '♻️'
+                    const b = a ? '⭐' : '♻️'
 
 
                     Promise.all([
@@ -757,7 +757,7 @@ function BONUS(msg) {
 
     User.findOne({tgId: msg.from.id})
         .then(user => {
-            bot.sendMessage(msg.from.id,`<b>На Вашем счёте:</b> ${user.bonus} 💠\n\n<i>1 💠 = $1 USD</i>`, {parse_mode: 'HTML'})
+            bot.sendMessage(msg.from.id,`😋 <b>В Вашей корзинке:</b> ${user.bonus} 🍩\n\n<i>100 🍩 = $1 USD</i>`, {parse_mode: 'HTML'})
 
         })}
 
@@ -780,7 +780,7 @@ bot.onText(/\/bonus (.+) (.+)/, (msg, match) => {
                     )
                 ]).then(([user, adm]) => {
 
-                    bot.sendMessage(-1001319046439, `💠 БОНУС 💠`,
+                    bot.sendMessage(-1001319046439, `😋 Плюшки 🍩🍩🍩`,
                         { reply_markup:{inline_keyboard: inline_keyboard.bonus} , parse_mode: 'HTML'}
                     )
                 })
@@ -814,7 +814,7 @@ function get(userId) {
                             let ubonus = +`${user.bonus}` + +`${admin.bon}`
 
                             winners.push(user.name)
-                       // console.log(winners)
+                      
                         Promise.all
                         ([
                             Admin.findOneAndUpdate({tgId: '184670517'},
@@ -824,7 +824,7 @@ function get(userId) {
                             )
                         ]).then(([admin, user]) => {
 
-                            bot.sendMessage(userId, `Вам начислено: ${admin.bon} 💠`)
+                            bot.sendMessage(userId, `😋 Поздравляю! Вы получили ${admin.bon} 🍩`)
 
                         })
                     }
@@ -841,35 +841,21 @@ bot.onText(/\/win/, msg => {
         .then(admin => {
             if(admin){
                 if(admin.bonus === 0) {
-                    bot.sendMessage(-1001319046439, `<b>🏆 Список победителей:</b> \n\n${admin.win}`, {parse_mode: 'HTML'})
+                    bot.sendMessage(-1001319046439, `🎊 <b>Раздача бонусов завершена! Плюшки получили:</b> \n\n${admin.win}`, {parse_mode: 'HTML'})
 
                 }
                 else {
                     bot.sendMessage(msg.from.id, `${admin}`)}
 
             }
-            //else{bot.sendMessage(msg.from.id, 'Отклонено..')}
+            
         })
 })
-//ADMIN=========================================================================================================
-/*
+======================================================================================
 
 
-})/*
-bot.onText(/\/deluser (.+)/, (msg, match) => {
-    const uid = match[1]
-    Admin.findOne({tgId: '184670517'})
-        .then(admin => {
-            if(admin.tgId === msg.from.id) {
-                User.remove({tgId: uid})
-                    .then(docs => {
-                        bot.sendMessage(msg.from.id, `Юзер ${uid} удален`)
-                        console.log(docs);
-                    })
-            }
 
-        })
-})*/
+             
 //RESET===================================
 bot.onText(/\/resetrub/, (msg) => {
     Promise.all([
