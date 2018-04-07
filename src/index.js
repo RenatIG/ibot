@@ -89,7 +89,7 @@ const inline_keyboard = {
         ]
 }
 //START====================================================
-bot.onText(/\/admin/, msg => {
+bot.onText(/\/saveadmin/, msg => {
 let adminPromise
 Admin.findOne({tgId: '184670517'})
 .then(admin => {
@@ -99,8 +99,8 @@ bot.sendMessage(msg.from.id, 'ok')
 }else {
 adminPromise = new Admin({
 tgId: '184670517'})
-    userPromise.save().then(_ =>{
-    bot.sendMessage(184670517, 'admin')})
+    adminPromise.save().then(_ =>{
+    bot.sendMessage(msg.from.id, 'admin')})
 }
 })
 })
