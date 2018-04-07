@@ -5,14 +5,7 @@ const helper = require('./helper');
 const keyboard = require('./keyboard');
 const kb = require('./keyboard-buttons');
 let winners = []
-//const database = require('../database.json')
-/*bot.answerCallbackQuery({
-        callback_query_id: query.id,
-        text: `Please wait...` 	 	})*/
-/*const Promise = require('bluebird');
-Promise.config({
-    cancellation: true
-});*/
+
 helper.logStart();
 
 mongoose.Promise = global.Promise;
