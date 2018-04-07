@@ -20,7 +20,7 @@ module.exports = {
         btc: '💼 BTC',
         support: '🤔 Support',
         news: '🌐 NEWS',
-        bonus: '💎 Бонус'
+        bonus: '🍩 Плюшки'
     },
     usd: {
        back: 'Назад'
