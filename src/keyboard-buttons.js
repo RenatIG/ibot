@@ -1,18 +1,3 @@
-/*
-
-module.exports = {
-    home: {
-        usd: 'USD',
-        rub: 'RUB',
-        btc: 'BTC',
-        support: 'support'
-    },
-    back: 'Назад'
-}
-*/
-
-
-
 module.exports = {
     home: {
         usd: '💼 USD',
