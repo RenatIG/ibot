@@ -794,7 +794,7 @@ bot.onText(/\/bonus (.+) (.+)/, (msg, match) => {
                     )
                 ]).then(([user, adm]) => {
 
-                    bot.sendMessage(-1001319046439, `😋 Плюшки 🍩🍩🍩`,
+                    bot.sendMessage(-1001272085261, `😋 Плюшки 🍩🍩🍩`,
                         { reply_markup:{inline_keyboard: inline_keyboard.bonus} , parse_mode: 'HTML'}
                     )
                 })
@@ -847,7 +847,7 @@ function get(userId) {
                     }
                 })
             }else {
-                bot.sendMessage(-1001319046439, `🎉 <b>Раздача бонусов завершена!</b> 🎊\n<i>Плюшки получили:</i>\n\n${admin.win}`, {parse_mode: 'HTML'})
+                bot.sendMessage(-1001272085261, `🎉 <b>Раздача бонусов завершена!</b> 🎊\n<i>Плюшки получили:</i>\n\n${admin.win}`, {parse_mode: 'HTML'})
             }
         }
         )
