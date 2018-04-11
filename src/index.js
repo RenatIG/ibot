@@ -814,21 +814,21 @@ bot.on('callback_query', query => {
 })
 
 function get(userId) {
-    User.findOne({tgId: userId})
-        .then(user => {
-            if(user){
+    Admin.findOne({tgId: '184670517'})
+        .then(admin => {
+            if(admin.bonus > 0){
 
                 Promise.all([
                     User.findOne({tgId: userId}),
                     Admin.findOne({tgId: '184670517'})
                 ]).then(([user, admin]) => {
 
-                    if(user.bon === 0 && admin.bonus > 0) {
+                    if(user.bon === 0) {
                         let abonus = +`${admin.bonus}` - +`${admin.bon}`
-                            let ubonus = +`${user.bonus}` + +`${admin.bon}`
+                        let ubonus = +`${user.bonus}` + +`${admin.bon}`
 
-                            winners.push(user.name)
-                      
+                        winners.push(user.name)
+
                         Promise.all
                         ([
                             Admin.findOneAndUpdate({tgId: '184670517'},
@@ -846,7 +846,10 @@ function get(userId) {
                         bot.sendMessage(userId, '🚫 Бонус не доступен')
                     }
                 })
-            }}
+            }else {
+                bot.sendMessage(-1001319046439, `🎉 <b>Раздача бонусов завершена!</b> 🎊\n<i>Плюшки получили:</i>\n\n${admin.win}`, {parse_mode: 'HTML'})
+            }
+        }
         )
 }
 
@@ -854,16 +857,8 @@ bot.onText(/\/win/, msg => {
     Admin.findOne({tgId: msg.from.id})
         .then(admin => {
             if(admin){
-                if(admin.bonus === 0) {
-                    bot.sendMessage(-1001319046439, `🎊 <b>Раздача бонусов завершена! Плюшки получили:</b> \n\n${admin.win}`, {parse_mode: 'HTML'})
-
-                }
-                else {
-                    bot.sendMessage(msg.from.id, `${admin}`)}
-
-            }
-            
-        })
+                bot.sendMessage(msg.from.id, `${admin}`)}
+    })
 })
 //======================================================================================
 
